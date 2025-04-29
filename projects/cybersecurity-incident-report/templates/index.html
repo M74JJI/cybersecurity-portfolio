@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cybersecurity Incident Report</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Cybersecurity Incident Report</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+      <label for="file">Upload Network Traffic Log (.pcap/.pcapng):</label>
+      <input type="file" name="file" id="file" required />
+      <button type="submit">Analyze</button>
+    </form>
+
+    {% if report %}
+    <h2>Cybersecurity Incident Report</h2>
+
+    <h3>Part 1: Problem Summary (DNS and ICMP Traffic Log)</h3>
+    <p><strong>UDP Protocol:</strong> {{ report.part1.udp_protocol }}</p>
+    <p>
+      <strong>ICMP Error Message:</strong> {{ report.part1.icmp_error_msg }}
+    </p>
+    <h4>DNS Issues:</h4>
+    <p>{{ report.part1.dns_summary }}</p>
+    <h4>ICMP Issues:</h4>
+    <p>{{ report.part1.icmp_summary }}</p>
+
+    <h3>Part 2: Analysis and Cause</h3>
+    <p>
+      <strong>Time Incident Occurred:</strong> {{
+      report.part2.time_incident_occurred }}
+    </p>
+    <p><strong>IT Awareness:</strong> {{ report.part2.it_awareness }}</p>
+    <p>
+      <strong>Actions Taken:</strong> {{ report.part2.investigation_actions }}
+    </p>
+    <p><strong>Key Findings:</strong> {{ report.part2.key_findings }}</p>
+    <p><strong>Likely Cause:</strong> {{ report.part2.likely_cause }}</p>
+    {% endif %}
+  </body>
+</html>
